@@ -10,7 +10,7 @@ from engine.risk_engine import analyze_text
 from engine.upi_analyzer import analyze_upi
 from engine.ocr import extract_text_from_image
 import engine.ocr as ocr_module
-from engine.llm import analyze_with_llm
+from engine.llm import analyze_with_llm, llm_available
 from engine.conversation import analyze_conversation
 from engine.i18n import tr, DEMOS, LANG_NAMES
 
@@ -117,12 +117,9 @@ def esc(value):
     return html.escape(str(value)).replace("\n", "<br>")
 
 
-@st.cache_data(ttl=20)
-def ollama_online():
-    try:
-        return requests.get("http://localhost:11434/api/tags", timeout=1).ok
-    except Exception:
-        return False
+@st.cache_data(ttl=60)
+def ai_online():
+    return llm_available()
 
 
 @st.cache_data(ttl=60)
@@ -139,7 +136,7 @@ def status_pill(label, ok):
 
 
 def hero():
-    ai, ocr = ollama_online(), ocr_ready()
+    ai, ocr = ai_online(), ocr_ready()
     show(f"""<div class="hero"><div class="logo">{LOGO}</div><div><h1>RakshaNet<small>AI</small></h1>
     <p>{t("tagline")}</p>
     <div class="chips">{status_pill(t("rules_ready"), True)}{status_pill(t("ai_on") if ai else t("ai_off"), ai)}
