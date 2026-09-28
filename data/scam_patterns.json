@@ -1,0 +1,33 @@
+{
+  "urgency": [
+    "immediately",
+    "urgent",
+    "act now",
+    "today",
+    "last chance",
+    "account will be blocked"
+  ],
+  "payment": [
+    "pay",
+    "send money",
+    "processing fee",
+    "verification fee",
+    "₹"
+  ],
+  "credential_request": [
+    "otp",
+    "upi pin",
+    "cvv",
+    "password"
+  ],
+  "impersonation": [
+    "SBI",
+    "HDFC",
+    "ICICI",
+    "RBI",
+    "Income Tax",
+    "Police",
+    "Amazon",
+    "Flipkart"
+  ]
+}
